@@ -1,0 +1,32 @@
+{
+  "vehicles": [
+    {
+      "id": 1,
+      "model": "swift",
+      "color": "black",
+      "publicKey": "73c6c098",
+      "privateKey": "eac4"
+    },
+    {
+      "id": "2",
+      "model": "ertiga",
+      "color": "cyan",
+      "publicKey": "101c6ef572",
+      "privateKey": "94a0"
+    },
+    {
+      "id": "3",
+      "model": "alto",
+      "color": "red",
+      "publicKey": "6b863a33fe1c018e17674c023db329b8",
+      "privateKey": "95e98fb81c"
+    },
+    {
+      "id": "4",
+      "model": "innova",
+      "color": "black",
+      "publicKey": "10bef3fe67f066dba7c9e6a77b6493ad385e1a39bdeead46fea1713e7d6197ca",
+      "privateKey": "17848194fff198323f4c"
+    }
+  ]
+}
