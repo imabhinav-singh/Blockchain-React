@@ -4,7 +4,7 @@ import { Form, Button, Select } from "antd";
 import "antd/es/form/style/css";
 import "antd/es/button/style/css";
 import "antd/es/select/style/css";
-import { COLOR_CONFIG, MODEL_CONFIG } from "../constants";
+import { COLOR_CONFIG, MODEL_CONFIG } from "../config";
 
 const { Option } = Select;
 

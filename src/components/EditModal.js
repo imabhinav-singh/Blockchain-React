@@ -5,7 +5,7 @@ import "antd/es/modal/style/css";
 import "antd/es/button/style/css";
 import "antd/es/select/style/css";
 import RegistartionForm from "./RegistartionForm";
-import { STATUS_CONFIG } from "../constants";
+import { STATUS_CONFIG } from "../config";
 
 const { Option } = Select;
 

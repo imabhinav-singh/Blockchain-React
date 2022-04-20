@@ -8,7 +8,7 @@ import "antd/es/avatar/style/css";
 import "antd/es/button/style/css";
 import "antd/es/popover/style/css";
 import EditModal from "./EditModal";
-import { COLOR_CONFIG, MODEL_CONFIG, STATUS_CONFIG } from "../constants";
+import { COLOR_CONFIG, MODEL_CONFIG, STATUS_CONFIG } from "../config";
 
 const VehicleList = ({ data, editAreaDetails, status, editVehicleDetails }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
