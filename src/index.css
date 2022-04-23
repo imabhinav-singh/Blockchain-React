@@ -7,8 +7,9 @@ main {
 }
 
 form {
-  width: 350px;
+  width: 600px;
   margin-bottom: 10px;
+  padding-right: 100px !important;
 }
 
 ul {
@@ -37,7 +38,37 @@ button:hover {
 }
 
 .vehicle-list {
-  width: 400px;
+  width: 500px;
+}
+
+.video-status {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0.5;
+  z-index: -1;
+  object-fit: cover;
+}
+
+.ant-divider-horizontal.ant-divider-with-text-center::before,
+.ant-divider-horizontal.ant-divider-with-text-center::after {
+  border-top: 1px solid black;
+}
+
+.ant-tag svg {
+  margin-right: 5px;
+  margin-bottom: 2px;
+}
+
+.ant-modal {
+  width: fit-content !important;
+}
+
+.desc-text {
+  font-size: 10px;
+  color: darkgray;
 }
 
 @keyframes example {

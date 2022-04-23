@@ -2,17 +2,31 @@ import { useState } from "react";
 import _join from "lodash/join";
 import { List, Avatar, Button, Popover } from "antd";
 import { EditOutlined } from "@ant-design/icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { BsFillPersonFill } from "react-icons/bs";
+import { IoIosSpeedometer } from "react-icons/io";
+import { HiLocationMarker } from "react-icons/hi";
 import "antd/es/list/style/css";
 import "antd/es/avatar/style/css";
 import "antd/es/button/style/css";
 import "antd/es/popover/style/css";
 import EditModal from "./EditModal";
-import { COLOR_CONFIG, MODEL_CONFIG, STATUS_CONFIG } from "../config";
+import { COLOR_CONFIG, MODEL_CONFIG, LOCATION_CONFIG } from "../config";
+import VehicleDetailIcon from "./VehicleDetailsIcon";
 
 const VehicleList = ({ data, editAreaDetails, status, editVehicleDetails }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [vehicle, setVehicle] = useState({});
+
+  const getPopoverContent = (publicKey) => (
+    <>
+      <div className="d-flex" style={{ fontSize: "10px" }}>
+        <p className="mb-0" style={{ fontWeight: "bold" }}>
+          Public Key:{" "}
+        </p>
+        {publicKey}
+      </div>
+    </>
+  );
 
   const onEditClick = (vehicle) => {
     // console.log(vehicle);
@@ -25,6 +39,7 @@ const VehicleList = ({ data, editAreaDetails, status, editVehicleDetails }) => {
       <List
         itemLayout="horizontal"
         dataSource={data}
+        style={{ backgroundColor: "rgba(255,255,255,0.5)" }}
         renderItem={(item) => (
           <List.Item
             actions={[
@@ -57,16 +72,7 @@ const VehicleList = ({ data, editAreaDetails, status, editVehicleDetails }) => {
               }
               title={
                 <Popover
-                  content={
-                    <>
-                      <div className="d-flex" style={{ fontSize: "10px" }}>
-                        <p className="mb-0" style={{ fontWeight: "bold" }}>
-                          Public Key:{" "}
-                        </p>
-                        {item.publicKey}
-                      </div>
-                    </>
-                  }
+                  content={getPopoverContent(item.publicKey)}
                   placement="top"
                   trigger="hover"
                 >
@@ -74,11 +80,20 @@ const VehicleList = ({ data, editAreaDetails, status, editVehicleDetails }) => {
                 </Popover>
               }
             />
-            <div className="px-3 status-div">{status}</div>
-            <FontAwesomeIcon
-              icon={STATUS_CONFIG[status].icon}
-              className="ms-2"
-              color={item.color}
+            <VehicleDetailIcon
+              icon={<BsFillPersonFill />}
+              text={item.passengerCapacity}
+              popoverText={`Passenger Capacity: ${item.passengerCapacity}`}
+            />
+            <VehicleDetailIcon
+              icon={<IoIosSpeedometer />}
+              text={item.distanceCovered}
+              popoverText={`Distance covered: ${item.distanceCovered} kms`}
+            />
+            <VehicleDetailIcon
+              icon={<HiLocationMarker />}
+              text={LOCATION_CONFIG[item.location]}
+              popoverText={`Location: ${LOCATION_CONFIG[item.location]}`}
             />
           </List.Item>
         )}

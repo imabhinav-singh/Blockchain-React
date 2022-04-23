@@ -41,11 +41,11 @@ const EditModal = ({
     closeModal();
   };
 
-  const onSubmitVehicleForm = (model, color) => {
+  const onSubmitVehicleForm = (args) => {
     if (isVehicleUpdate) {
-      editVehicleDetails(vehicle.id, model, color);
+      editVehicleDetails(vehicle.id, args);
     } else {
-      registerVehicle(model, color);
+      registerVehicle(args);
     }
     closeModal();
   };

@@ -11,9 +11,10 @@ import VehicleList from "./components/VehicleList";
 import VehicleData from "./contracts/VehicleData.json";
 import "./index.css";
 import EditModal from "./components/EditModal";
+import { STATUS_CONFIG } from "./config";
 
 const App = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [account, setAccount] = useState("");
   const [vehicleCount, setVehicleCount] = useState(0);
   const [vehicleData, setVehicleData] = useState({});
@@ -28,13 +29,24 @@ const App = () => {
       placement: "bottom",
     });
 
-  const registerVehicle = async (model, color) => {
+  const registerVehicle = async (args) => {
     setLoading(true);
     try {
-      const msghash = web3Provider.utils.sha3(JSON.stringify({ model, color }));
+      const msghash = web3Provider.utils.sha3(
+        JSON.stringify({ model: args.model, color: args.color })
+      );
       const result = await web3Provider.eth.sign(msghash, account);
       vehicleData.methods
-        .registerVehicle(account, color, model, msghash, result)
+        .registerVehicle(
+          account,
+          args.color,
+          args.model,
+          args.passengerCapacity,
+          args.distanceCovered,
+          args.location,
+          msghash,
+          result
+        )
         .send({ from: account })
         .on("receipt", (receipt) => {
           fetchVehicleDetails(vehicleData);
@@ -77,13 +89,24 @@ const App = () => {
     }
   };
 
-  const editVehicleDetails = async (id, model, color) => {
+  const editVehicleDetails = async (id, args) => {
     setLoading(true);
     try {
-      const msghash = web3Provider.utils.sha3(JSON.stringify({ model, color }));
+      const msghash = web3Provider.utils.sha3(
+        JSON.stringify({ model: args.model, color: args.color })
+      );
       const result = await web3Provider.eth.sign(msghash, account);
       vehicleData.methods
-        .editVehicle(id, color, model, msghash, result)
+        .editVehicle(
+          id,
+          args.color,
+          args.model,
+          args.passengerCapacity,
+          args.distanceCovered,
+          args.location,
+          msghash,
+          result
+        )
         .send({ from: account })
         .on("receipt", (receipt) => {
           fetchVehicleDetails(vehicleData);
@@ -107,6 +130,7 @@ const App = () => {
       const _status = await _vehicleData.methods.status().call();
       setVehicleCount(_vehicleCount);
       setStatus(_status);
+      console.log(_status);
 
       const _vehicles = [];
       for (let i = 1; i <= _vehicleCount; i++) {
@@ -143,10 +167,11 @@ const App = () => {
 
     load();
   }, []);
+
   return (
     <>
-      <div className="d-flex flex-column">
-        <Header account={account} />
+      <div className="d-flex flex-column relative">
+        <Header account={account} status={status} loading={loading} />
         <div className="container-fluid">
           <div className="col-lg-12 d-flex justify-content-center align-items-center flex-column">
             {loading ? (
@@ -175,6 +200,15 @@ const App = () => {
             isVehicleUpdate={false}
           />
         </div>
+        {status ? (
+          <video
+            src={STATUS_CONFIG[status].video}
+            autoPlay
+            loop
+            muted
+            className="video-status"
+          />
+        ) : null}
       </div>
     </>
   );

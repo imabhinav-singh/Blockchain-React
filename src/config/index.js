@@ -3,7 +3,9 @@ import {
   faCloudShowersHeavy,
   faSmog,
   faCarOn,
+  faTrafficLight,
 } from "@fortawesome/free-solid-svg-icons";
+import { videos } from "../assets/videos";
 
 export const MODEL_CONFIG = {
   innova: "Innova",
@@ -21,11 +23,20 @@ export const MODEL_CONFIG = {
   scorpio: "Scorpio",
 };
 
-export const AREA_CONFIG = {
-  normal: "moving",
-  raining: "slowed down",
-  foggy: "stopped",
-  highway: "speeding",
+export const LOCATION_CONFIG = {
+  hyderabad: "Hyderabad",
+  chennai: "Chennai",
+  delhi: "Delhi",
+  lucknow: "Lucknow",
+  mumbai: "Mumbai",
+  bangalore: "Bangalore",
+  guwahati: "Guwahati",
+  noida: "Noida",
+  ahmedabad: "Ahmedabad",
+  vishakhapatnam: "Vishakhapatnam",
+  pune: "Pune",
+  kolkata: "Kolkata",
+  agra: "Agra",
 };
 
 export const COLOR_CONFIG = {
@@ -47,17 +58,26 @@ export const STATUS_CONFIG = {
   normal: {
     text: "Normal",
     icon: faCarOn,
+    video: videos.normal,
   },
   raining: {
     text: "Raining",
     icon: faCloudShowersHeavy,
+    video: videos.raining,
   },
   highway: {
     text: "Highway",
     icon: faRoad,
+    video: videos.highway,
   },
   foggy: {
     text: "Foggy",
     icon: faSmog,
+    video: videos.foggy,
+  },
+  traffic: {
+    text: "Traffic",
+    icon: faTrafficLight,
+    video: videos.traffic,
   },
 };
